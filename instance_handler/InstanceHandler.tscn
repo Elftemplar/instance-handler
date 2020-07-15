@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tile_map/items.res" type="TileSet" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+var spawn_point = preload(\"res://instance_handler/SpawnPoint.tscn\")
+
+export (Array, PackedScene) var items
+
+
+func _ready() -> void:
+	$Items.hide()
+	spawn_block()
+
+
+func spawn_block() -> void:
+	for cell in $Items.get_used_cells():
+		var id = $Items.get_cellv(cell)
+		var type = $Items.tile_set.tile_get_name(id)
+		
+		for item in items:
+			var title = item._bundled['names'][0]
+			if title == type:
+				var sp = spawn_point.instance()
+				sp.setup(self, item)
+				sp.position = $Items.map_to_world(cell)
+				self.add_child(sp)
+"
+
+[node name="InstanceHandler" type="Node"]
+script = SubResource( 1 )
+
+[node name="Items" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+format = 1

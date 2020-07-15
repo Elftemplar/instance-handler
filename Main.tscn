@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://instance_handler/InstanceHandler.tscn" type="PackedScene" id=1]
+[ext_resource path="res://enemy/PuntoVerde.tscn" type="PackedScene" id=2]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://items/BloqueVerde.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemy/PuntoRojo.tscn" type="PackedScene" id=5]
+
+[node name="Main" type="Node"]
+
+[node name="InstanceHandler" parent="." instance=ExtResource( 1 )]
+items = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 4 ) ]
+
+[node name="Items" parent="InstanceHandler" index="0"]
+tile_data = PoolIntArray( 131054, 1, 0, 131059, 2, 0, 65548, 1, 0, 65554, 1, 0, 196602, 0, 0, 131076, 0, 0, 524270, 2, 0, 524275, 2, 0, 524282, 0, 0, 458756, 0, 0, 458764, 1, 0, 458770, 1, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( -27.9615, 315.566 )
+
+[editable path="InstanceHandler"]
